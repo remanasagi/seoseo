@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For. 서연이에게 ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap');
+
+:root {
+  --pink: #f5a7c5;
+  --deep-pink: #d85f91;
+  --cream: #fff9f5;
+  --text: #704b5c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Gowun Dodum', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 15% 15%, #ffe1ec 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 85%, #ffe8d9 0%, transparent 40%),
+    linear-gradient(135deg, #fff7fa, #fff1f0, #fce5f0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 35px 18px;
+}
+
+/* 은은하게 빛나는 배경 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
+  background-size: 37px 37px;
+  opacity: .55;
+}
+
+.container {
+  width: 100%;
+  max-width: 510px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  animation: appear 1.2s ease both;
+}
+
+.top-label {
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: #cc8ba7;
+  margin-bottom: 23px;
+}
+
+.heart-icon {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.9);
+  box-shadow: 0 10px 35px #e8a2c32b;
+  animation: heartbeat 2s infinite;
+}
+
+h1 {
+  font-family: 'Gowun Batang', serif;
+  font-size: clamp(35px, 8vw, 51px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 1.45;
+  color: #bd668b;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: #b58a9d;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 28px 0;
+  color: #d58eac;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  width: 55px;
+  height: 1px;
+  background: #e9b9cb;
+}
+
+.letter {
+  position: relative;
+  padding: 35px 29px;
+  border: 1px solid rgba(229, 180, 199, .65);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, .72);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 20px 60px rgba(195, 111, 147, .10),
+    inset 0 0 25px rgba(255,255,255,.6);
+}
+
+.letter::before {
+  content: "✿";
+  position: absolute;
+  top: 13px;
+  left: 17px;
+  color: #e9b4c9;
+  font-size: 19px;
+}
+
+.letter::after {
+  content: "✿";
+  position: absolute;
+  bottom: 13px;
+  right: 17px;
+  color: #e9b4c9;
+  font-size: 19px;
+}
+
+.letter-title {
+  font-family: 'Gowun Batang', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #c47799;
+}
+
+.message {
+  font-size: 15px;
+  line-height: 2.2;
+  word-break: keep-all;
+}
+
+.message strong {
+  color: #cf6794;
+  font-weight: 700;
+}
+
+.highlight {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 5px 14px;
+  border-radius: 30px;
+  background: #fff0f5;
+  color: #cb6e97;
+}
+
+.open-btn {
+  margin-top: 27px;
+  padding: 15px 30px;
+  border: 0;
+  border-radius: 50px;
+  color: white;
+  background: linear-gradient(120deg, #f0a9c7, #d87ba4);
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: .5px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px #d985ab40;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.open-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px #d985ab65;
+}
+
+.secret {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height .8s ease, opacity .8s ease,
+              margin .8s ease;
+}
+
+.secret.show {
+  max-height: 350px;
+  opacity: 1;
+  margin-top: 24px;
+}
+
+.secret-inner {
+  padding: 22px 14px;
+  border-top: 1px dashed #e8b5ca;
+  font-family: 'Gowun Batang', serif;
+  font-size: 17px;
+  line-height: 2;
+}
+
+.secret-inner .big-love {
+  display: block;
+  color: #d45e90;
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.signature {
+  margin-top: 26px;
+  color: #bb8a9f;
+  font-family: 'Gowun Batang', serif;
+  font-size: 14px;
+}
+
+.signature span {
+  display: block;
+  margin-top: 7px;
+  color: #d8789f;
+  font-size: 18px;
+}
+
+.footer {
+  margin-top: 30px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #c9a0b1;
+}
+
+/* 떠다니는 하트 */
+.floating-heart {
+  position: fixed;
+  bottom: -40px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: .75; }
+  85% { opacity: .65; }
+  100% {
+    transform: translateY(-110vh) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  12% { transform: scale(1.08); }
+  24% { transform: scale(1); }
+  36% { transform: scale(1.05); }
+  48% { transform: scale(1); }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 400px) {
+  .letter { padding: 32px 20px; }
+  .message { font-size: 14px; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+  <p class="top-label">A LITTLE LETTER FOR YOU</p>
+
+  <div class="heart-icon">♡</div>
+
+  <h1>서연아,</h1>
+  <p class="subtitle">오늘도 너에게 전하고 싶은 말</p>
+
+  <div class="divider">✧ ♡ ✧</div>
+
+  <section class="letter">
+    <p class="letter-title">Dear. 서연이</p>
+
+    <div class="message">
+      오늘 하루도 정말 수고 많았어.<br>
+      혹시 조금 지치고 힘든 날이더라도<br>
+      너무 무리하지 않았으면 좋겠어.<br><br>
+
+      언제나 잘하려고 애쓰는 네가<br>
+      나는 참 대단하고 예뻐 보여.<br>
+      그러니까 가끔은 쉬어가도 괜찮아.<br><br>
+
+      세상이 조금 힘들게 느껴지는 날에도<br>
+      <strong>너는 충분히 잘하고 있고,</strong><br>
+      <strong>지금 그대로도 소중한 사람이야.</strong>
+
+      <br>
+      <span class="highlight">오늘도 내일도 네 편이야 ♡</span>
+    </div>
+
+    <button class="open-btn" id="openBtn"
+      onclick="openLetter()">
+      너를 위한 작은 선물 열기 ♡
+    </button>
+
+    <div class="secret" id="secret">
+      <div class="secret-inner">
+        서연아, 꼭 기억해 줘.<br>
+        네가 웃으면 나도 행복하고,<br>
+        네가 힘들 땐 내가 안아주고 싶어.
+
+        <span class="big-love">
+          서연이 힘내, 사랑해 ♡
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <p class="signature">
+    세상에서 너를 응원하는 사람이
+    <span>언제나, 너의 편에서 ♡</span>
+  </p>
+
+  <p class="footer">MADE WITH LOVE · FOR SEOYEON</p>
+
+</main>
+
+<script>
+let opened = false;
+
+function openLetter() {
+  const secret = document.getElementById("secret");
+  const button = document.getElementById("openBtn");
+
+  if (!opened) {
+    secret.classList.add("show");
+    button.textContent = "사랑을 듬뿍 담아서 ♡";
+    opened = true;
+    createHearts(22);
+  } else {
+    createHearts(10);
+  }
+}
+
+function createHearts(amount) {
+  const symbols = ["♡", "♥", "✧", "💕", "୨୧"];
+
+  for (let i = 0; i < amount; i++) {
+    const heart = document.createElement("span");
+    heart.className = "floating-heart";
+    heart.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (12 + Math.random() * 20) + "px";
+    heart.style.color = [
+      "#e8a1bf", "#f0b8cb", "#d87ba4", "#e7b7a7"
+    ][Math.floor(Math.random() * 4)];
+
+    const duration = 4 + Math.random() * 4;
+    heart.style.animationDuration = duration + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), duration * 1000);
+  }
+}
+
+/* 배경에 가끔 하트가 올라오도록 */
+setInterval(() => {
+  if (Math.random() > 0.35) createHearts(1);
+}, 1100);
+</script>
+</body>
+</html>
